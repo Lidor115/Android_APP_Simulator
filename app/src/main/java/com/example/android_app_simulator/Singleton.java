@@ -1,15 +1,14 @@
 package com.example.android_app_simulator;
 
 public class Singleton {
-    private volatile Client client;
+    private static volatile Client client;
 
-    public Singleton() {
-    }
+    private Singleton() {}
 
-    public Client getClient() {
-        if (this.client == null) {
-            this.client = new Client();
+    public static Client getClient() {
+        if (client == null) {
+            client = new Client();
         }
-        return this.client;
+        return client;
     }
 }

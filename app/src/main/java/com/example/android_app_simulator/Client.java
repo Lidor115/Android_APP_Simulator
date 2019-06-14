@@ -15,7 +15,6 @@ import static android.content.ContentValues.TAG;
 public class Client {
     private String ip;
     private int port;
-    private Thread t;
     private Socket socket;
 
 
@@ -38,8 +37,8 @@ public class Client {
                 }
             }
         };
-        this.t = new Thread(r);
-        this.t.start();
+        Thread t = new Thread(r);
+        t.start();
     }
 
     public void SendToSimulator(float aileronN, float elevatorN) {
@@ -62,7 +61,8 @@ public class Client {
                         sender.flush();
                     }
                 }
-            };
+            }; Thread thread = new Thread(r);
+            thread.start();
 
         } catch (IOException e) {
             Log.e("TCP", "C: Error", e);
