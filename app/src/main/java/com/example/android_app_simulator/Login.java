@@ -21,10 +21,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         connectB.setOnClickListener(this);
     }
 
-
     protected void connection(String ip, int port){
-        Connect c = new Connect(ip,port);
-        c.connection();
+        Singleton s = new Singleton();
+        s.getClient().connection(ip,port);
     }
 
     @Override
