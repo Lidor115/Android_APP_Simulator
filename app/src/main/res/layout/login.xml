@@ -39,11 +39,11 @@
         android:layout_marginRight="20dp"
         android:digits="0123456789."
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="number|numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ipText"
-        app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/port"
@@ -54,11 +54,11 @@
         android:layout_marginRight="20dp"
         android:digits="0123456789"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="number|numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/portText"
-        app:layout_constraintTop_toBottomOf="@+id/ip"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/ip" />
 
     <Button
         android:id="@+id/connectB"
