@@ -22,22 +22,30 @@ public class Joystick extends SurfaceView implements SurfaceHolder.Callback, Vie
 
     private float hatRadius;
 
+    private JoystickListener joystickCallback;
+
     public Joystick(Context context, AttributeSet attrs) {
         super(context, attrs);
         getHolder().addCallback(this);
         setOnTouchListener(this);
+        if(context instanceof JoystickListener)
+            joystickCallback = (JoystickListener) context;
     }
 
     public Joystick(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         getHolder().addCallback(this);
         setOnTouchListener(this);
+        if(context instanceof JoystickListener)
+            joystickCallback = (JoystickListener) context;
     }
 
     public Joystick(Context context) {
         super(context);
         getHolder().addCallback(this);
         setOnTouchListener(this);
+        if(context instanceof JoystickListener)
+            joystickCallback = (JoystickListener) context;
     }
 
     private void setupDimensions(){
@@ -70,19 +78,34 @@ public class Joystick extends SurfaceView implements SurfaceHolder.Callback, Vie
             if (event.getAction() != event.ACTION_UP){
                 float displacement = (float) Math.sqrt((Math.pow(event.getX() - centerX,2)) +
                         Math.pow(event.getY() - centerY,2));
-                if (displacement < baseRadius)
+                if (displacement < baseRadius){
                     drawJoystick(event.getX(), event.getY());
+                    joystickCallback.onJoystickMoved((centerX - event.getX()) / baseRadius,
+                            (event.getY() - centerY) / baseRadius, getId());
+                }
                 else {
                     float ratio = baseRadius / displacement;
                     float constrainedX = centerX + (event.getX() - centerX) * ratio;
                     float constrainedY = centerY + (event.getY() - centerY) * ratio;
                     drawJoystick(constrainedX,constrainedY);
+                    joystickCallback.onJoystickMoved((constrainedX - centerX) / baseRadius,
+                            (centerY - constrainedY) / baseRadius, getId());
                 }
-            } else
+            } else{
                 drawJoystick(centerX,centerY);
+                joystickCallback.onJoystickMoved(0,0,getId());
+            }
         }
 
         return true;
+    }
+
+    public interface JoystickListener
+
+    {
+
+        void onJoystickMoved(float xPercent, float yPercent, int source);
+
     }
 
     private void drawJoystick(float x, float y) {
