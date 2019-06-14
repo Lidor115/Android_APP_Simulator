@@ -1,3 +1,5 @@
+package com.example.android_app_simulator;
+
 import android.util.Log;
 
 import java.io.IOException;
