@@ -59,7 +59,9 @@ public class Joystick extends SurfaceView implements SurfaceHolder.Callback, Vie
 
     @Override
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-
+        Singleton s = new Singleton();
+        s.getClient().close();
+        System.out.println("Close!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
     @Override

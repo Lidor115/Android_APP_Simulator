@@ -9,6 +9,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+
 import static android.content.ContentValues.TAG;
 
 public class Client {
@@ -18,7 +19,8 @@ public class Client {
     private Socket socket;
 
 
-    public Client() {}
+    public Client() {
+    }
 
     public void connection(String temp_ip, int temp_port) {
         this.ip = temp_ip;
@@ -40,9 +42,9 @@ public class Client {
         this.t.start();
     }
 
-    public void SendToSimulator(float aileronN, float elevatorN){
+    public void SendToSimulator(float aileronN, float elevatorN) {
         final String aileronS = "/controls/flight/aileron " + Float.toString(aileronN) + "\r\n";
-        final String elevatorS = "controls/flight/elevator " + Float.toString(elevatorN)+ "\r\n";
+        final String elevatorS = "controls/flight/elevator " + Float.toString(elevatorN) + "\r\n";
         Send(aileronS);
         Send(elevatorS);
     }
@@ -54,8 +56,8 @@ public class Client {
             Runnable r = new Runnable() {
                 @Override
                 public void run() {
-                    if(sender!=null){
-                        Log.d(TAG, "Sending: "+ toSend);
+                    if (sender != null) {
+                        Log.d(TAG, "Sending: " + toSend);
                         sender.println(toSend);
                         sender.flush();
                     }
@@ -66,6 +68,14 @@ public class Client {
             Log.e("TCP", "C: Error", e);
             System.out.println((e.toString()));
         }
+    }
 
+    public void close() {
+        try {
+            this.socket.close();
+        } catch (IOException e) {
+            Log.e("TCP", "C: Error", e);
+            System.out.println((e.toString()));
+        }
     }
 }
