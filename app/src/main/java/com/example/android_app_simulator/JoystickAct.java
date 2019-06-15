@@ -8,16 +8,15 @@ import android.util.Log;
 
 public class JoystickAct extends AppCompatActivity implements Joystick.JoystickListener{
 
-    private Joystick js;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        js = new Joystick(this);
-        setContentView(js);
+        setContentView(R.layout.joystick);
     }
 
     @Override
     public void onJoystickMoved(float xPercent, float yPercent, int source) {
+        Singleton.getClient().SendToSimulator(xPercent,yPercent);
         Log.d("Main Method", "X percent: " + xPercent + " Y percent: " + yPercent);
     }
 }

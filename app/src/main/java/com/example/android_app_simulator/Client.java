@@ -42,8 +42,8 @@ public class Client {
     }
 
     public void SendToSimulator(float aileronN, float elevatorN) {
-        final String aileronS = "/controls/flight/aileron " + Float.toString(aileronN) + "\r\n";
-        final String elevatorS = "controls/flight/elevator " + Float.toString(elevatorN) + "\r\n";
+        final String aileronS = "set /controls/flight/aileron " + Float.toString(aileronN) + "\r\n";
+        final String elevatorS = "set /controls/flight/elevator " + Float.toString(elevatorN) + "\r\n";
         Send(aileronS);
         Send(elevatorS);
     }
