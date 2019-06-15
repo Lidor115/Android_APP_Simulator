@@ -63,7 +63,9 @@ public class Joystick extends SurfaceView implements SurfaceHolder.Callback, Vie
 
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-
+        System.out.println("Change!!!!!!!!!!!!!!!!!!!!!!!!");
+        setupDimensions();
+        drawJoystick(centerX,centerY);
     }
 
     @Override
